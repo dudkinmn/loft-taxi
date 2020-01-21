@@ -3,7 +3,7 @@ import './App.css';
 
 
 class App extends React.Component {
-  state = { curPage: "maps"};
+  state = { curPage: "login"};
  
   changePage = (needPage) => {
     this.setState({curPage:needPage})
@@ -22,7 +22,7 @@ class App extends React.Component {
               return (
                  <React.Fragment>
                     <Header changePage={this.changePage.bind(this)}/>
-                    <h1>Профиль</h1>
+                    <ProfileForm changePage={this.changePage.bind(this)}/>
                 </React.Fragment>)
         case "login" :
               return (
@@ -133,7 +133,7 @@ class LoginForm extends React.Component {
 }
 
 class RegisterForm extends React.Component {
-  state = { login: "", password: "", password2:"" };
+  state = { login: "", password: "", name:"", surname:"" };
 
   constructor(props){
     super(props);
@@ -143,13 +143,8 @@ class RegisterForm extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
     // Предотвращаем перезагрузку страницы
-    if (this.state.password === this.state.password2) {
-      this.props.changePage("maps");
-    } else {
-      alert ('Введенные пароли не совпадают!')
-      this.setState({password2:""})
-    }
-    
+    this.props.changePage("maps");
+   
     // Делаем что-то с данными формы
   };
 
@@ -163,10 +158,14 @@ class RegisterForm extends React.Component {
     
   };
 
-  handlePassword2Change = event => {
-    this.setState({ password2: event.target.value });
-    console.log(this.state.password2);
+  handleNameChange = event => {
+    this.setState({ name: event.target.value });
+    console.log(this.state.name);
+  };
 
+  handleSurnameChange = event => {
+    this.setState({ name: event.target.value });
+    console.log(this.state.name);
   };
 
   changeAppState = event => {
@@ -175,43 +174,159 @@ class RegisterForm extends React.Component {
   }
 
   render() {
-    const { login, password, password2 } = this.state;
+    const { login, password, name, surname } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
-        <p>Регистрация нового пользователя</p>
-   
+        <p>Регистрация</p>
+        <p>Уже зарегистрированы?
+          <a href='' onClick={this.changeAppState}>Войти</a> 
+        </p>
         <label>Адрес электронной почты</label>
         <br></br>
-        <input
-            type="text"
-            value={login}
-            onChange={this.handleLoginChange}
-        />
+          <input
+              type="email"
+              placeholder="Адрес электронной почты"
+              value={login}
+              onChange={this.handleLoginChange}
+          />
         <br></br>
+
+        <div>
+          <label>Имя*:</label>
+          <br></br>
+          <input
+            type="text"
+            value={name}
+            placeholder="Имя"
+            onChange={this.handleNameChange}
+          />
+        </div>
+
+        <div>
+          <label>Фамилия*:</label>
+          <br></br>
+          <input
+            type="text"
+            value={surname}
+            placeholder="Фамилия"
+            onChange={this.handleSurnameChange}
+          />
+        </div>
+
+        
         <br></br>
         <label>Пароль:</label>
         <br></br>
         <input
-            type="text"
+            type="password"
             value={password}
+            placeholder="Пароль"
             onChange={this.handlePasswordChange}
         />
+       
         <br></br>
-        <label>Повторите пароль:</label>
-        <br></br>
-        <input
-            type="text"
-            value={password2}
-            onChange={this.handlePassword2Change}
-        />
-        <br></br>
-        <br></br>
-        <input type="submit" value="Зарегистрироваться" />
+        <input type="submit" value="Войти" />
       </form>
     );
   }
 }
 
+class ProfileForm extends React.Component {
+  state = { login: "", password: "", name:"", surname:"" };
+
+  constructor(props){
+    super(props);
+    this.changeAppState = this.changeAppState.bind(this);
+  }
+
+  handleSubmit = event => {
+    event.preventDefault();
+    // Предотвращаем перезагрузку страницы
+    this.props.changePage("maps");
+   
+    // Делаем что-то с данными формы
+  };
+
+  handleLoginChange = event => {
+    this.setState({ login: event.target.value });
+  };
+
+  handlePasswordChange = event => {
+    this.setState({ password: event.target.value });
+    console.log(this.state.password);
+    
+  };
+
+  handleNameChange = event => {
+    this.setState({ name: event.target.value });
+    console.log(this.state.name);
+  };
+
+  handleSurnameChange = event => {
+    this.setState({ name: event.target.value });
+    console.log(this.state.name);
+  };
+
+  changeAppState = event => {
+    event.preventDefault();
+    this.props.changePage('profile');
+  }
+
+  render() {
+    const { login, password, name, surname } = this.state;
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <p>Профиль</p>
+        <p>Способ оплаты</p>
+
+        <label>Адрес электронной почты
+            <input
+              type="email"
+              placeholder="Адрес электронной почты"
+              value={login}
+              onChange={this.handleLoginChange}
+            />
+        </label>
+
+        <div>
+          <label>Имя*:</label>
+          <br></br>
+          <input
+            type="text"
+            value={name}
+            placeholder="Имя"
+            onChange={this.handleNameChange}
+          />
+        </div>
+
+        <div>
+          <label>Фамилия*:</label>
+          <br></br>
+          <input
+            type="text"
+            value={surname}
+            placeholder="Фамилия"
+            onChange={this.handleSurnameChange}
+          />
+        </div>
+
+        
+        <br></br>
+        <label>Пароль:</label>
+        <br></br>
+        <input
+            type="password"
+            value={password}
+            placeholder="Пароль"
+            onChange={this.handlePasswordChange}
+        />
+       
+        <br></br>
+        <input type="submit" value="Войти" />
+      </form>
+    );
+  }
+}
 
 
 export default App;

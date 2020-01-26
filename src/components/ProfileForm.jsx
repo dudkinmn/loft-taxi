@@ -1,4 +1,6 @@
 import React from "react"
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 class ProfileForm extends React.Component {
     state = { cardNumber: "", timeToExceed: "", userName:"", cvc:"" };
@@ -25,21 +27,20 @@ class ProfileForm extends React.Component {
           <p>Профиль</p>
           <p>Способ оплаты</p>
   
-          <label>Номер карты
-              <input
-                name='cardNumber'
-                type="text"
-                placeholder="0000 0000 0000 0000"
-                value={cardNumber}
-                onChange={this.handleTextChange}
-              />
-          </label>
+          <TextField 
+            name
+            required id="standard-basic" 
+            label="Номер карты" 
+            /*value={cardNumber} 
+            onChange={this.handleTextChange}*/
+          />
+
   
           <label>Срок действия
               <input
                 name='timeToExceed'
                 type="text"
-                placeholder="mm yyyy"
+                placeholder="вв m yyyy"
                 value={timeToExceed}
                 onChange={this.handleTextChange}
               />

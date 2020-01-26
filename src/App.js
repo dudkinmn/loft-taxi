@@ -4,14 +4,33 @@ import Header from './components/Header'
 import ProfileForm from './components/ProfileForm'
 import RegisterForm from './components/RegisterForm'
 import LoginForm from './components/LoginForm'
+import Map from './components/Map'
 
 
 
 class App extends React.Component {
-  state = { curPage: "login"};
+  state = { 
+    curPage: "login",
+
+    logIn: (login, password) => {
+        console.log("я в аппе" + login + password);
+        this.setState.isLoggedIn = true;
+        this.changePage( 'maps')   
+        },
+
+    logOut: () => {
+        this.changePage('login')
+        this.setState.isLoggedIn = false
+        },
+    
+    isLoggedIn: false
+  
+  }
+
+ 
 
   pages = {
-    maps: () => <h1>Карта</h1>,
+    maps: () => <Map mapboxApiAccessToken ='pk.eyJ1IjoiZHVka2lubW4iLCJhIjoiY2s1dmhyOWVoMHE4cDNrbzBnMzZla2cxciJ9.HmUvlYG3zbSoCth7HBzM_A'/>,
     profile: () => <ProfileForm changePage={this.changePage}/>,
     login: () => <LoginForm changePage={this.changePage}/>,
     register: () => <RegisterForm changePage={this.changePage}/>
@@ -25,13 +44,17 @@ class App extends React.Component {
 
    render() {
     return (
-      <div>
-        {this.renderHeader()}
-        {this.pages[this.state.curPage]()}
-      </div>
+      <LoginContext.Provider value={this.state}>
+        <div>
+          {this.renderHeader()}
+          {this.pages[this.state.curPage]()}
+        </div>
+      </LoginContext.Provider>
 
     )
     }
 }
 
 export default App;
+export const LoginContext = React.createContext();
+

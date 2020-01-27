@@ -1,15 +1,20 @@
 import React from "react"
-import UserButton from './UserButton'
+import Button from '@material-ui/core/Button';
+import {LoginContext} from '../App';
 
 class Header extends React.Component {
     render() {
       return (
-        <React.Fragment>
-          <UserButton name="Карта" linkPage="maps" {...this.props} />
-          <UserButton name="Профиль" linkPage="profile" changePage={this.props.changePage}/>
-          <UserButton name="Выйти" linkPage="login" changePage={this.props.changePage}/> 
-        </React.Fragment>
-        )   
+        <LoginContext.Consumer>
+          {({logOut, isLoggedIn, setPageMaps, setPageProfile}) => (
+            <React.Fragment>
+              <Button onClick={setPageMaps} >Карта</Button>
+              <Button onClick={setPageProfile}>Профиль</Button>
+              <Button name="Выйти" onClick={logOut} >Выйти</Button>
+            </React.Fragment>
+          )}
+        </LoginContext.Consumer>   
+      )
     }
   }
 

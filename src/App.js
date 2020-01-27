@@ -23,8 +23,11 @@ class App extends React.Component {
         this.setState.isLoggedIn = false
         },
     
-    isLoggedIn: false
-  
+    isLoggedIn: false,
+
+    setPageMaps: () => {this.setState({curPage: "maps"})},
+    setPageProfile: () => {this.setState({curPage: "profile"})}
+      
   }
 
  

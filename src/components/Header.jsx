@@ -15,7 +15,7 @@ class Header extends React.Component {
           )}
         </LoginContext.Consumer>   
       )
-    }
+    }   
   }
 
   export default Header 

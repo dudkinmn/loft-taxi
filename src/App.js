@@ -43,10 +43,11 @@ class App extends React.Component {
     this.setState({curPage})
   }
 
-  renderHeader = () => (this.state.curPage==='maps' || this.state.curPage==='profile') && <Header changePage={this.changePage}/>
+  renderHeader = () => (this.state.curPage==='maps' || this.state.curPage==='profile') && <Header />
 
    render() {
     return (
+      
       <LoginContext.Provider value={this.state}>
         <div>
           {this.renderHeader()}

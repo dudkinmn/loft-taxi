@@ -1,6 +1,7 @@
 import React from "react"
 import Button from '@material-ui/core/Button';
 import {LoginContext} from '../App';
+import { Switch, Route, Link, Redirect} from 'react-router-dom'
 
 class Header extends React.Component {
     render() {
@@ -8,8 +9,8 @@ class Header extends React.Component {
         <LoginContext.Consumer>
           {({logOut, isLoggedIn, setPageMaps, setPageProfile}) => (
             <React.Fragment>
-              <Button onClick={setPageMaps} >Карта</Button>
-              <Button onClick={setPageProfile}>Профиль</Button>
+              <Link to='/maps'><Button>Карта</Button></Link>
+              <Button href="/profile">Профиль</Button>
               <Button name="Выйти" onClick={logOut} >Выйти</Button>
             </React.Fragment>
           )}

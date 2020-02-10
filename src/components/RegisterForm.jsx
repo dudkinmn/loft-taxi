@@ -1,4 +1,9 @@
 import React from 'react'
+import Link from '@material-ui/core/Link';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import {LoginContext} from '../App';
+
 
 class RegisterForm extends React.Component {
     state = { login: "", password: "", name:"", surname:"" };
@@ -9,9 +14,12 @@ class RegisterForm extends React.Component {
     };
   
     handleTextChange = event => {
+      event.preventDefault();
+      console.log([event.target.name]);
       this.setState({ [event.target.name]: event.target.value });
-      console.log(this.state.name);
+      
     };
+  
 
     changeAppState = event => {
         event.preventDefault();
@@ -24,7 +32,7 @@ class RegisterForm extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <p>Регистрация</p>
           <p>Уже зарегистрированы?
-            <a href='' onClick={this.changeAppState}>Войти</a> 
+            <a href='/' onClick={this.changeAppState}>Войти</a> 
           </p>
           <label>Адрес электронной почты</label>
           <br></br>
@@ -74,7 +82,17 @@ class RegisterForm extends React.Component {
           />
          
           <br></br>
-          <input type="submit" value="Войти" />
+          <br></br>
+              
+          <Button 
+            name="submitButton"
+            variant="contained" 
+            color="primary"
+            href="/maps"
+            type="submit"
+          >
+            Войти
+          </Button>
         </form>
       );
     }

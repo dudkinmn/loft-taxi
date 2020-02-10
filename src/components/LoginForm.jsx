@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from '@material-ui/core/Link';
+import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import {LoginContext} from '../App';
@@ -13,7 +13,7 @@ class LoginForm extends React.Component {
       console.log([event.target.name]);
       this.setState({ [event.target.name]: event.target.value });
       
-  };
+    };
   
   
     changeAppState = event => {
@@ -21,16 +21,21 @@ class LoginForm extends React.Component {
       this.props.changePage('register');
     }
   
+    makelogIn = (logIn) =>  (e) => {
+      e.preventDefault();
+      logIn(this.state.login, this.state.password)
+    }
+
     render() {
       const { login, password } = this.state;
       return (
         <LoginContext.Consumer>
           {({logIn}) => (
-            <form onSubmit={() => logIn(login, password)}>
+            <form onSubmit={this.makelogIn(logIn)}>
               <p>Войти</p>
 
               <p>Новый пользователь?
-                <Link href="#" onClick={this.changeAppState}>Зарегистрируйтесь</Link>
+                <Link to="/register">Зарегистрируйтесь</Link>
               </p>
       
               <TextField

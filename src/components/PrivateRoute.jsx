@@ -3,29 +3,16 @@ import { Route, Redirect } from 'react-router-dom'
 
 
 let PrivateRoute = ({
-    component,
-    targetPath,
-    isAuthorized,
-    loginPath,
-    ...rest
-  }) => (
-    <>
-     {
-        isAuthorized ? (
-            <>
-            {console.log('sdsddsdsds')}
-            <Route render={() => component} path={targetPath}/>
-            </>
-        ) : (
-            <>
-               <Redirect to={loginPath} />
-               {console.log('redirect')}
+  component,
+  targetPath,
+  isAuthorized,
+  loginPath,
+  ...rest
+}) => (<Route exact render={(props) => (
+        isAuthorized ?
+        component() :
+        <Redirect to={loginPath} />)} path={targetPath} />
+      )
 
-            </>
-        )
-      }
-    </>
-  );
 
-  
 export default PrivateRoute

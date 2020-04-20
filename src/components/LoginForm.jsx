@@ -21,7 +21,7 @@ class LoginForm extends React.Component {
       this.props.changePage('register');
     }
   
-    makelogIn = (logIn) =>  (e) => {
+    makelogIn = (logIn) => (e) => {
       e.preventDefault();
       logIn(this.state.login, this.state.password)
     }
